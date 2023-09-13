@@ -13,6 +13,11 @@ export default class StudentsController {
     return await student.related('courses').attach(courseIds);
   }
 
+  public async show({ request }: HttpContextContract) {
+    const id = request.param('id')
+    return await Student.query().where('id',id).preload('courses').firstOrFail()
+  }
+
   public async update({ request }: HttpContextContract) {
     const id = request.param('id')
     const { name, courseIds } = request.body()
