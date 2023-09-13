@@ -3,7 +3,7 @@ import Student from 'App/Models/Student'
 
 export default class StudentsController {
   public async index({ }: HttpContextContract) {
-    return await Student.all()
+    return await Student.query().preload('courses')
   }
 
   public async store({ request }: HttpContextContract) {
